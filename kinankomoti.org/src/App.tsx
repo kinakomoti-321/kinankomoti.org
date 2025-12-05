@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import icon from "./icon/kinankomoti.jpg";
+import WorkList from "./work";
 import "./App.css";
 
 function AboutMe() {
@@ -52,6 +53,21 @@ function Home() {
   );
 }
 
+function Work() {
+  return (
+    <motion.div
+      key="work"
+      initial={{ opacity: 0, y: -15 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 15 }}
+      transition={{ duration: 0.4 }}
+    >
+      <h1>Work</h1>
+      <WorkList />
+    </motion.div>
+  );
+}
+
 function App() {
   const tabs = [
     { id: "home", label: "Home" },
@@ -64,18 +80,7 @@ function App() {
   const content = {
     home: Home(),
     about: AboutMe(),
-    work: (
-      <motion.div
-        key="work"
-        initial={{ opacity: 0, y: -15 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 15 }}
-        transition={{ duration: 0.4 }}
-      >
-        <h1>Work</h1>
-        <p>制作物などを書く場所</p>
-      </motion.div>
-    ),
+    work: Work(),
   };
 
   return (
