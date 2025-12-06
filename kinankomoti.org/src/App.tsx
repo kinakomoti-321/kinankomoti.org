@@ -5,6 +5,11 @@ import WorkList from "./work";
 import "./App.css";
 
 function AboutMe() {
+  const socialLinks = [
+    { label: "X", href: "https://x.com/Kinakomoti2357" },
+    { label: "GitHub", href: "https://github.com/kinakomoti-321" },
+  ]
+
   return (
     <div>
       <motion.div
@@ -32,6 +37,21 @@ function AboutMe() {
           <h2>skill</h2>
           <p>C++ / C / C# / GLSL / HLSL / Slang / Rust</p>
           <p>Physics, Optics, Computer Graphics</p>
+
+          <h2 style={{ marginTop: "20px" }}>links</h2>
+          <div className="social-grid">
+            {socialLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                className="social-card"
+              >
+                <span>{link.label}</span>
+              </a>
+            ))}
+          </div>
         </div>
 
       </motion.div>
