@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Box } from "./geometry"
 
 export interface WorkMeta {
     title: string
@@ -77,6 +78,7 @@ export default function WorkList() {
 
     return (
         <div
+            className="work-wrapper"
             style={{
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
@@ -85,10 +87,13 @@ export default function WorkList() {
             }}
         >
             <div
+                className="work-grid-scroll"
                 style={{
                     display: "grid",
                     gap: "12px",
                     gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                    maxHeight: "70vh",
+                    overflowY: "auto",
                 }}
             >
                 {works.map((w) => {
@@ -233,5 +238,6 @@ export default function WorkList() {
                 )}
             </div>
         </div>
+
     )
 }

@@ -78,3 +78,19 @@
   transform: translateY(0);
   border-color: #666;
 }
+
+.work-wrapper {
+  border: 1px solid #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  background: #0f0f0f;
+}
+
+.work-grid-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.work-grid-scroll::-webkit-scrollbar {
+  display: none;
+}
