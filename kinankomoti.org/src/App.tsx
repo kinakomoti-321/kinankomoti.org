@@ -1,7 +1,8 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import icon from "./icon/kinankomoti.jpg";
 import WorkList from "./work";
+import Background from "./background";
 import "./App.css";
 
 function AboutMe() {
@@ -30,8 +31,8 @@ function AboutMe() {
               style={{ borderRadius: "8px", marginTop: "12px" }}
             />
             <div style={{ textAlign: "left" }}>
-              <p>Physically Based Renderingが好き</p>
-              <p>某所でグラフィックスエンジニアをさせて頂いてます</p>
+              <p>Physically Based Rendering</p>
+              <p>Graphics engineer in training.</p>
             </div>
           </div>
           <h2>skill</h2>
@@ -105,6 +106,7 @@ function App() {
 
   return (
     <>
+      <Background />
       <header className="header">
         <nav className="header-nemu">
           {tabs.map((tab) => (
