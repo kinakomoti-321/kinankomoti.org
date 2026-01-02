@@ -66,8 +66,8 @@ function renderWorkItem(work: WorkData) {
                         key={tag}
                         style={{
                             padding: "4px 8px",
-                            borderRadius: "999px",
-                            background: "#1a1a1a",
+                            borderRadius: "0",
+                            background: "transparent",
                             border: "1px solid #222",
                             fontSize: "12px",
                         }}
@@ -104,7 +104,6 @@ function renderWorkModal(selected: WorkData, onClose: () => void) {
               style={{
                 position: "relative",
                 width: "100%",
-                aspectRatio: "1 / 1",
                 overflow: "hidden",
                 borderRadius: "10px",
                 background: "#111",
@@ -115,8 +114,8 @@ function renderWorkModal(selected: WorkData, onClose: () => void) {
                 alt={selected.title}
                 style={{
                   width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
+                  height: "auto",
+                  objectFit: "contain",
                   display: "block",
                 }}
               />
@@ -130,8 +129,8 @@ function renderWorkModal(selected: WorkData, onClose: () => void) {
                     key={tag}
                     style={{
                       padding: "4px 8px",
-                      borderRadius: "999px",
-                      background: "#1a1a1a",
+                      borderRadius: "0",
+                      background: "transparent",
                       border: "1px solid #222",
                       fontSize: "12px",
                     }}

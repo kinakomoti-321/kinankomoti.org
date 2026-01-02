@@ -14,7 +14,7 @@ function AboutMe() {
   return (
     <div className="profile-wrap">
       <div style={{ textAlign: "left" }}>
-        <div style={{ display: "flex", gap: "16px", marginTop: "12px" }}>
+        <div style={{ display: "flex", gap: "20px", marginTop: "12px" }}>
           <div>
             <img
               src={icon}
@@ -26,39 +26,40 @@ function AboutMe() {
           </div>
           <div style={{ textAlign: "left" }}>
             <h1>kinankomoti</h1>
-            <p>Graphics Engineer</p>
+            <h3>きなこもち</h3>
+
+            <br></br>
+            <p>東京某所でGraphics Engineerをしています</p>
           </div>
         </div>
 
-        <div style={{ display: "flex", marginTop: "12px" }}>
-          <div>
-            <h2>skill</h2>
-            <p>C++ / C / C# / GLSL / HLSL / Slang / Rust</p>
+        <div style={{ margin: "10px", marginTop: "40px" }}>
+          <h2>skill</h2>
+          <div style={{ margin: "15px" }}>
+            <p>C++ / C / C# / Rust / GLSL / HLSL / Slang </p>
           </div>
-          <div>
-            <h2>Interests</h2>
+        </div>
+
+        <div style={{ margin: "10px", marginTop: "40px" }}>
+          <h2>Interests</h2>
+          <div style={{ margin: "15px" }}>
             <p> - Computer Graphcis</p>
-            <p> - Physically Based Rendering </p>
+            <p> - Physically Based Rendering</p>
+            <p> - Raytracing</p>
             <p> - Geometry </p>
           </div>
         </div>
 
-        <h2 style={{ marginTop: "20px" }}>links</h2>
-        <div className="social-grid">
-          {socialLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noreferrer"
-              className="social-card"
-            >
-              <span>{link.label}</span>
-            </a>
-          ))}
+        <div style={{ margin: "10px", marginTop: "40px" }}>
+          <h2>links</h2>
+          <div style={{ margin: "15px" }}>
+            <p>- X</p>
+            <p>- Blog</p>
+            <p>- Github</p>
+          </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

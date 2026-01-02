@@ -1,8 +1,9 @@
 @import "katex/dist/katex.min.css";
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@300;400;500;700&display=swap");
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.0;
+  font-family: "IBM Plex Sans JP", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  line-height: 0.5;
   font-weight: 400;
   font-size: 18px;
 
@@ -58,7 +59,7 @@ body::-webkit-scrollbar {
 
 h1 {
   font-size: 3.2em;
-  line-height: 1.1;
+  line-height: 0.1;
 }
 
 button {
