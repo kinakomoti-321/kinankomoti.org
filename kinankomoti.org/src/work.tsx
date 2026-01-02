@@ -154,6 +154,8 @@ function renderWorkModal(selected: WorkData, onClose: () => void) {
 export default function WorkList() {
   const [works, setWorks] = useState<WorkData[]>([]);
   const [selected, setSelected] = useState<WorkData | null>(null);
+  const [isClosing, setIsClosing] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     async function load() {
@@ -166,6 +168,24 @@ export default function WorkList() {
     load();
   }, []);
 
+  const closeModal = () => {
+    setIsOpen(false);
+    setIsClosing(true);
+    window.setTimeout(() => {
+      setSelected(null);
+      setIsClosing(false);
+    }, 420);
+  };
+
+  const openModal = (work: WorkData) => {
+    setSelected(work);
+    setIsClosing(false);
+    setIsOpen(false);
+    window.requestAnimationFrame(() => {
+      setIsOpen(true);
+    });
+  };
+
   return (
     <div className="work-wrapper">
       <div className="work-list">
@@ -174,13 +194,21 @@ export default function WorkList() {
             key={work.slug}
             className="work-card"
             type="button"
-            onClick={() => setSelected(work)}
+            onClick={() => openModal(work)}
           >
             {renderWorkItem(work)}
           </button>
         ))}
       </div>
-      {selected ? renderWorkModal(selected, () => setSelected(null)) : null}
+      {selected ? (
+        <div
+          className={`work-modal-shell${isOpen ? " is-open" : ""}${
+            isClosing ? " is-closing" : ""
+          }`}
+        >
+          {renderWorkModal(selected, closeModal)}
+        </div>
+      ) : null}
     </div>
   );
 }

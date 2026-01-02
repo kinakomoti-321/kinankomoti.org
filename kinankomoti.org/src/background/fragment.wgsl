@@ -35,6 +35,6 @@ fn fs_main(@location(0) texcoord: vec2f) -> @location(0) vec4f {
   // let s = sd_sphere(uv);
   uv = rotate_2d(uv,time);
   let s = sd_box(uv, vec2f(0.3,0.3));
-  var color = vec3f(smoothstep(0.0,0.005,s) * smoothstep(0.01,0.0095,s));
+  var color = mix(vec3f(0.0),vec3f(0.7),vec3f(smoothstep(0.0,0.005,s) * smoothstep(0.01,0.0095,s)));
   return vec4f(color, 1.0);
 }

@@ -54,6 +54,24 @@
   justify-content: center;
 }
 
+.profile-wrap {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.home-hero {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.home-title {
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  line-height: 1.05;
+}
+
 .tab-item {
   display: inline-flex;
   align-items: center;
@@ -188,6 +206,8 @@
   justify-content: center;
   padding: 24px;
   z-index: 200;
+  opacity: 0;
+  transition: opacity 400ms ease;
 }
 
 .work-modal {
@@ -200,6 +220,8 @@
   border-radius: 4px;
   padding: 20px;
   text-align: left;
+  transform: translateY(8px);
+  transition: transform 400ms ease;
 }
 
 .work-modal-body {
@@ -233,6 +255,22 @@
   color: #bbb;
   font-size: 22px;
   cursor: pointer;
+}
+
+.work-modal-shell.is-open .work-modal-overlay {
+  opacity: 1;
+}
+
+.work-modal-shell.is-open .work-modal {
+  transform: translateY(0);
+}
+
+.work-modal-shell.is-closing .work-modal-overlay {
+  opacity: 0;
+}
+
+.work-modal-shell.is-closing .work-modal {
+  transform: translateY(8px);
 }
 
 .work-grid-scroll {

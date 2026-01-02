@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+﻿import { motion } from "framer-motion";
 import icon from "./icon/kinankomoti.jpg";
 import WorkList from "./work";
 import Background from "./background";
@@ -12,25 +12,36 @@ function AboutMe() {
   ];
 
   return (
-    <div>
+    <div className="profile-wrap">
       <div style={{ textAlign: "left" }}>
-        <h1>kinankomoti</h1>
-        <div style={{ display: "flex", alignItems: "center", gap: "16px", marginTop: "12px" }}>
-          <img
-            src={icon}
-            alt="kinankomoti"
-            width={128}
-            height={128}
-            style={{ borderRadius: "8px", marginTop: "12px" }}
-          />
+        <div style={{ display: "flex", gap: "16px", marginTop: "12px" }}>
+          <div>
+            <img
+              src={icon}
+              alt="kinankomoti"
+              width={128 * 1.5}
+              height={128 * 1.5}
+              style={{ borderRadius: "8px", marginTop: "12px" }}
+            />
+          </div>
           <div style={{ textAlign: "left" }}>
-            <p>Physically Based Rendering</p>
-            <p>Graphics engineer in training.</p>
+            <h1>kinankomoti</h1>
+            <p>Graphics Engineer</p>
           </div>
         </div>
-        <h2>skill</h2>
-        <p>C++ / C / C# / GLSL / HLSL / Slang / Rust</p>
-        <p>Physics, Optics, Computer Graphics</p>
+
+        <div style={{ display: "flex", marginTop: "12px" }}>
+          <div>
+            <h2>skill</h2>
+            <p>C++ / C / C# / GLSL / HLSL / Slang / Rust</p>
+          </div>
+          <div>
+            <h2>Interests</h2>
+            <p> - Computer Graphcis</p>
+            <p> - Physically Based Rendering </p>
+            <p> - Geometry </p>
+          </div>
+        </div>
 
         <h2 style={{ marginTop: "20px" }}>links</h2>
         <div className="social-grid">
@@ -55,12 +66,13 @@ function Home() {
   return (
     <motion.div
       key="home"
+      className="home-hero"
       initial={{ opacity: 0, y: -15 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 15 }}
       transition={{ duration: 0.4 }}
     >
-      <h1>kinankomoti.org</h1>
+      <h1 className="home-title">kinankomoti.org</h1>
     </motion.div>
   );
 }
