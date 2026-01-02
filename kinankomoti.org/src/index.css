@@ -35,6 +35,17 @@ body {
   min-height: 100vh;
 }
 
+html,
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
 .webgpu-canvas {
   position: fixed;
   inset: 0;

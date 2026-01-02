@@ -49,6 +49,11 @@
   scroll-margin-top: 90px;
 }
 
+.section-center {
+  display: flex;
+  justify-content: center;
+}
+
 .tab-item {
   display: inline-flex;
   align-items: center;
@@ -77,6 +82,38 @@
   height: 1px;
   background: currentColor;
   opacity: 0.8;
+}
+
+.header-menu {
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: none;
+}
+
+.scrollbar-track {
+  position: fixed;
+  right: 16px;
+  top: 8px;
+  bottom: 8px;
+  width: 6px;
+  z-index: 120;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.scrollbar-track.is-visible {
+  opacity: 1;
+}
+
+.scrollbar-thumb {
+  width: 100%;
+  background: #ffffff;
+  opacity: 0.75;
+  border-radius: 0;
 }
 
 .social-grid {

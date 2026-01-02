@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import icon from "./icon/kinankomoti.jpg";
 import WorkList from "./work";
 import Background from "./background";
+import ScrollIndicator from "./ScrollIndicator";
 import "./App.css";
 
 function AboutMe() {
@@ -82,13 +83,14 @@ function Work() {
 function App() {
   const tabs = [
     { id: "home", label: "Home" },
-    { id: "about", label: "About Me" },
+    { id: "profile", label: "Profile" },
     { id: "work", label: "Work" },
   ];
 
   return (
     <>
       <Background />
+      <ScrollIndicator />
       <header className="header">
         <nav className="header-menu">
           {tabs.map((tab) => (
@@ -103,7 +105,7 @@ function App() {
         <section id="home" className="section">
           <Home />
         </section>
-        <section id="about" className="section">
+        <section id="profile" className="section section-center">
           <AboutMe />
         </section>
         <section id="work" className="section">
