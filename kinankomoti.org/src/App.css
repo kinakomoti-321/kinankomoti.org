@@ -104,7 +104,7 @@
 
 .header-menu {
   padding: 6px 10px;
-  border-radius: 6px;
+  border-radius: 0;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -144,7 +144,7 @@
 
 .social-card {
   border: 1px solid #2a2a2a;
-  border-radius: 4px;
+  border-radius: 0;
   background: #111111;
   color: #f0f0f0;
   text-decoration: none;
@@ -168,7 +168,7 @@
 
 .work-wrapper {
   border: none;
-  border-radius: 4px;
+  border-radius: 0;
   padding: 16px;
   background: transparent;
 }
@@ -186,7 +186,7 @@
   text-align: left;
   background: transparent;
   border: none;
-  border-radius: 4px;
+  border-radius: 0;
   padding: 10px;
   cursor: pointer;
   color: inherit;
@@ -249,6 +249,7 @@
 }
 
 .work-modal-title {
+  font-size: 35px;
   margin: 0;
   line-height: 1.2;
 }

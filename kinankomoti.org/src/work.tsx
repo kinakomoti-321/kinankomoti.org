@@ -12,6 +12,32 @@ export interface WorkData extends WorkMeta {
     Component: React.FC;
 }
 
+function getYouTubeId(url: string) {
+    try {
+        const parsed = new URL(url);
+        const host = parsed.hostname.replace("www.", "");
+        if (host === "youtu.be") {
+            return parsed.pathname.replace("/", "");
+        }
+        if (host === "youtube.com" || host === "m.youtube.com") {
+            if (parsed.pathname === "/watch") {
+                return parsed.searchParams.get("v");
+            }
+            if (parsed.pathname.startsWith("/embed/")) {
+                return parsed.pathname.split("/").pop() ?? null;
+            }
+        }
+    } catch {
+        return null;
+    }
+    return null;
+}
+
+function getYouTubeThumbnail(url: string) {
+    const id = getYouTubeId(url);
+    return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : null;
+}
+
 export async function getWorks(): Promise<WorkData[]> {
     const modules = import.meta.glob("./work/*.mdx");
 
@@ -33,6 +59,7 @@ export async function getWorks(): Promise<WorkData[]> {
 }
 
 function renderWorkItem(work: WorkData) {
+    const youtubeThumb = getYouTubeThumbnail(work.thumbnail);
     return (
         <>
             <div
@@ -41,12 +68,12 @@ function renderWorkItem(work: WorkData) {
                     width: "100%",
                     aspectRatio: "1 / 1",
                     overflow: "hidden",
-                    borderRadius: "8px",
+                    borderRadius: "0",
                     background: "#111",
                 }}
             >
                 <img
-                    src={work.thumbnail}
+                    src={youtubeThumb ?? work.thumbnail}
                     alt={work.title}
                     style={{
                         width: "100%",
@@ -81,6 +108,8 @@ function renderWorkItem(work: WorkData) {
 }
 
 function renderWorkModal(selected: WorkData, onClose: () => void) {
+    const youtubeId = getYouTubeId(selected.thumbnail);
+    const youtubeThumb = getYouTubeThumbnail(selected.thumbnail);
     return (
         <div className="work-modal-overlay" onClick={onClose} role="presentation">
             <div
@@ -96,30 +125,45 @@ function renderWorkModal(selected: WorkData, onClose: () => void) {
                     onClick={onClose}
                     aria-label="Close"
                 >
-                    ?
+                    ×
                 </button>
                 <div className="work-modal-body">
                     <div className="work-modal-meta">
-                        <div
-                            style={{
-                                position: "relative",
-                                width: "100%",
-                                overflow: "hidden",
-                                borderRadius: "10px",
-                                background: "#111",
-                            }}
-                        >
-                            <img
-                                src={selected.thumbnail}
-                                alt={selected.title}
+                        {youtubeId ? (
+                            <iframe
+                                src={`https://www.youtube.com/embed/${youtubeId}`}
+                                title={selected.title}
                                 style={{
                                     width: "100%",
-                                    height: "auto",
-                                    objectFit: "contain",
+                                    aspectRatio: "16 / 9",
+                                    border: "0",
                                     display: "block",
                                 }}
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
                             />
-                        </div>
+                        ) : (
+                            < div
+                                style={{
+                                    position: "relative",
+                                    width: "100%",
+                                    overflow: "hidden",
+                                    borderRadius: "0",
+                                    background: "#111",
+                                }}
+                            >
+                                <img
+                                    src={youtubeThumb ?? selected.thumbnail}
+                                    alt={selected.title}
+                                    style={{
+                                        width: "100%",
+                                        height: "auto",
+                                        objectFit: "contain",
+                                        display: "block",
+                                    }}
+                                />
+                            </div>
+                        )}
                     </div>
                     <div className="work-modal-detail">
                         <div className="work-modal-meta-text">
@@ -146,7 +190,7 @@ function renderWorkModal(selected: WorkData, onClose: () => void) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
