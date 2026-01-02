@@ -1,5 +1,4 @@
-﻿import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import icon from "./icon/kinankomoti.jpg";
 import WorkList from "./work";
 import Background from "./background";
@@ -9,55 +8,46 @@ function AboutMe() {
   const socialLinks = [
     { label: "X", href: "https://x.com/Kinakomoti2357" },
     { label: "GitHub", href: "https://github.com/kinakomoti-321" },
-  ]
+  ];
 
   return (
     <div>
-      <motion.div
-        key="about"
-        initial={{ opacity: 0, y: -15 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 15 }}
-        transition={{ duration: 0.4 }}
-      >
-        <div style={{ textAlign: "left" }}>
-          <h1>kinankomoti</h1>
-          <div style={{ display: "flex", alignItems: "center", gap: "16px", marginTop: "12px" }}>
-            <img
-              src={icon}
-              alt="kinankomoti"
-              width={128}
-              height={128}
-              style={{ borderRadius: "8px", marginTop: "12px" }}
-            />
-            <div style={{ textAlign: "left" }}>
-              <p>Physically Based Rendering</p>
-              <p>Graphics engineer in training.</p>
-            </div>
-          </div>
-          <h2>skill</h2>
-          <p>C++ / C / C# / GLSL / HLSL / Slang / Rust</p>
-          <p>Physics, Optics, Computer Graphics</p>
-
-          <h2 style={{ marginTop: "20px" }}>links</h2>
-          <div className="social-grid">
-            {socialLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noreferrer"
-                className="social-card"
-              >
-                <span>{link.label}</span>
-              </a>
-            ))}
+      <div style={{ textAlign: "left" }}>
+        <h1>kinankomoti</h1>
+        <div style={{ display: "flex", alignItems: "center", gap: "16px", marginTop: "12px" }}>
+          <img
+            src={icon}
+            alt="kinankomoti"
+            width={128}
+            height={128}
+            style={{ borderRadius: "8px", marginTop: "12px" }}
+          />
+          <div style={{ textAlign: "left" }}>
+            <p>Physically Based Rendering</p>
+            <p>Graphics engineer in training.</p>
           </div>
         </div>
+        <h2>skill</h2>
+        <p>C++ / C / C# / GLSL / HLSL / Slang / Rust</p>
+        <p>Physics, Optics, Computer Graphics</p>
 
-      </motion.div>
+        <h2 style={{ marginTop: "20px" }}>links</h2>
+        <div className="social-grid">
+          {socialLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target="_blank"
+              rel="noreferrer"
+              className="social-card"
+            >
+              <span>{link.label}</span>
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
 function Home() {
@@ -96,35 +86,29 @@ function App() {
     { id: "work", label: "Work" },
   ];
 
-  const [activeTab, setActiveTab] = useState("home");
-
-  const content = {
-    home: Home(),
-    about: AboutMe(),
-    work: Work(),
-  };
-
   return (
     <>
       <Background />
       <header className="header">
-        <nav className="header-nemu">
+        <nav className="header-menu">
           {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              className={`tab-item ${activeTab === tab.id ? "active" : ""}`}
-              onClick={() => setActiveTab(tab.id)}
-            >
+            <a key={tab.id} className="tab-item" href={`#${tab.id}`}>
               {tab.label}
-            </button>
+            </a>
           ))}
         </nav>
       </header>
 
       <main className="content">
-        <AnimatePresence mode="wait">
-          {content[activeTab]}
-        </AnimatePresence>
+        <section id="home" className="section">
+          <Home />
+        </section>
+        <section id="about" className="section">
+          <AboutMe />
+        </section>
+        <section id="work" className="section">
+          <Work />
+        </section>
       </main>
     </>
   );

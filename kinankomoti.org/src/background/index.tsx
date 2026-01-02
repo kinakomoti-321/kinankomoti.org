@@ -40,6 +40,9 @@ function Background() {
         usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
       });
 
+      const uniformData = new Float32Array(4);
+      const startTime = performance.now();
+
       const configureCanvas = () => {
         const dpr = window.devicePixelRatio || 1;
         const width = Math.max(1, Math.floor(window.innerWidth * dpr));
@@ -49,8 +52,11 @@ function Background() {
           canvas.height = height;
         }
         context.configure({ device, format, alphaMode: "premultiplied" });
-        const resolutionData = new Float32Array([width, height, 0, 0]);
-        device.queue.writeBuffer(uniformBuffer, 0, resolutionData);
+        uniformData[0] = width;
+        uniformData[1] = height;
+        uniformData[2] = 0;
+        uniformData[3] = 0;
+        device.queue.writeBuffer(uniformBuffer, 0, uniformData);
       };
 
       const vertexModule = device.createShaderModule({ code: vertexShader });
@@ -91,7 +97,7 @@ function Background() {
       });
 
       const vertexData = new Float32Array([
-        -1.0,-1.0, 1.0, 0.2, 0.2,
+        -1.0, -1.0, 1.0, 0.2, 0.2,
         1.0, -1.0, 0.2, 1.0, 0.3,
         -1.0, 1.0, 0.2, 0.4, 1.0,
         1.0, 1.0, 1.0, 0.8, 0.2,
@@ -112,6 +118,9 @@ function Background() {
 
       const draw = () => {
         if (cancelled) return;
+        const now = (performance.now() - startTime) * 0.001;
+        uniformData[2] = now;
+        device.queue.writeBuffer(uniformBuffer, 0, uniformData);
         const commandEncoder = device.createCommandEncoder();
         const pass = commandEncoder.beginRenderPass({
           colorAttachments: [
