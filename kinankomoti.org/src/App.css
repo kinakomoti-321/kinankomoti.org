@@ -212,8 +212,9 @@
 
 .work-modal {
   position: relative;
-  width: min(1040px, 94vw);
-  max-height: 110vh;
+  width: min(2400px, 150vw);
+  max-height: 220vh;
+  max-width: 150vh;
   overflow: auto;
   background: #111111;
   border: none;
@@ -226,7 +227,7 @@
 
 .work-modal-body {
   display: grid;
-  grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
@@ -236,6 +237,32 @@
   gap: 16px;
   border-right: 1px solid #2a2a2a;
   padding-right: 12px;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.work-modal-meta-text {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.work-modal-title {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.work-modal-date {
+  color: #888;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.work-modal-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 .work-modal-detail {
@@ -244,6 +271,24 @@
   gap: 16px;
   justify-content: center;
   align-items: flex-start;
+  line-height: 1.0;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.work-modal-detail :is(p, li) {
+  margin: 0 0 -0.5em;
+  line-height: 1.3;
+}
+
+.work-modal-detail :is(p, li):last-child {
+  margin-bottom: 0;
+}
+
+.work-modal-detail a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .work-modal-close {

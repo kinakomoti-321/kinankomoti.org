@@ -29,7 +29,7 @@ export async function getWorks(): Promise<WorkData[]> {
         })
     );
 
-  return works;
+    return works;
 }
 
 function renderWorkItem(work: WorkData) {
@@ -77,137 +77,136 @@ function renderWorkItem(work: WorkData) {
                 ))}
             </div>
         </>
-  );
+    );
 }
 
 function renderWorkModal(selected: WorkData, onClose: () => void) {
-  return (
-    <div className="work-modal-overlay" onClick={onClose} role="presentation">
-      <div
-        className="work-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-label={selected.title}
-        onClick={(event) => event.stopPropagation()}
-      >
-        <button
-          className="work-modal-close"
-          type="button"
-          onClick={onClose}
-          aria-label="Close"
-        >
-          ×
-        </button>
-        <div className="work-modal-body">
-          <div className="work-modal-meta">
+    return (
+        <div className="work-modal-overlay" onClick={onClose} role="presentation">
             <div
-              style={{
-                position: "relative",
-                width: "100%",
-                overflow: "hidden",
-                borderRadius: "10px",
-                background: "#111",
-              }}
+                className="work-modal"
+                role="dialog"
+                aria-modal="true"
+                aria-label={selected.title}
+                onClick={(event) => event.stopPropagation()}
             >
-              <img
-                src={selected.thumbnail}
-                alt={selected.title}
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  objectFit: "contain",
-                  display: "block",
-                }}
-              />
+                <button
+                    className="work-modal-close"
+                    type="button"
+                    onClick={onClose}
+                    aria-label="Close"
+                >
+                    ?
+                </button>
+                <div className="work-modal-body">
+                    <div className="work-modal-meta">
+                        <div
+                            style={{
+                                position: "relative",
+                                width: "100%",
+                                overflow: "hidden",
+                                borderRadius: "10px",
+                                background: "#111",
+                            }}
+                        >
+                            <img
+                                src={selected.thumbnail}
+                                alt={selected.title}
+                                style={{
+                                    width: "100%",
+                                    height: "auto",
+                                    objectFit: "contain",
+                                    display: "block",
+                                }}
+                            />
+                        </div>
+                    </div>
+                    <div className="work-modal-detail">
+                        <div className="work-modal-meta-text">
+                            <h2 className="work-modal-title">{selected.title}</h2>
+                            <div className="work-modal-date">{selected.date}</div>
+                            <div className="work-modal-tags">
+                                {selected.tags?.map((tag) => (
+                                    <span
+                                        key={tag}
+                                        style={{
+                                            padding: "4px 8px",
+                                            borderRadius: "0",
+                                            background: "transparent",
+                                            border: "1px solid #222",
+                                            fontSize: "12px",
+                                        }}
+                                    >
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                        <selected.Component />
+                    </div>
+                </div>
             </div>
-            <div>
-              <h2 style={{ margin: "8px 0 6px" }}>{selected.title}</h2>
-              <div style={{ color: "#888", fontSize: "12px" }}>{selected.date}</div>
-              <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", marginTop: "6px" }}>
-                {selected.tags?.map((tag) => (
-                  <span
-                    key={tag}
-                    style={{
-                      padding: "4px 8px",
-                      borderRadius: "0",
-                      background: "transparent",
-                      border: "1px solid #222",
-                      fontSize: "12px",
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="work-modal-detail">
-            <selected.Component />
-          </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default function WorkList() {
-  const [works, setWorks] = useState<WorkData[]>([]);
-  const [selected, setSelected] = useState<WorkData | null>(null);
-  const [isClosing, setIsClosing] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+    const [works, setWorks] = useState<WorkData[]>([]);
+    const [selected, setSelected] = useState<WorkData | null>(null);
+    const [isClosing, setIsClosing] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    async function load() {
-      const loaded = await getWorks();
+    useEffect(() => {
+        async function load() {
+            const loaded = await getWorks();
 
             loaded.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
             setWorks(loaded);
         }
 
-    load();
-  }, []);
+        load();
+    }, []);
 
-  const closeModal = () => {
-    setIsOpen(false);
-    setIsClosing(true);
-    window.setTimeout(() => {
-      setSelected(null);
-      setIsClosing(false);
-    }, 420);
-  };
+    const closeModal = () => {
+        setIsOpen(false);
+        setIsClosing(true);
+        window.setTimeout(() => {
+            setSelected(null);
+            setIsClosing(false);
+        }, 420);
+    };
 
-  const openModal = (work: WorkData) => {
-    setSelected(work);
-    setIsClosing(false);
-    setIsOpen(false);
-    window.requestAnimationFrame(() => {
-      setIsOpen(true);
-    });
-  };
+    const openModal = (work: WorkData) => {
+        setSelected(work);
+        setIsClosing(false);
+        setIsOpen(false);
+        window.requestAnimationFrame(() => {
+            setIsOpen(true);
+        });
+    };
 
-  return (
-    <div className="work-wrapper">
-      <div className="work-list">
-        {works.map((work) => (
-          <button
-            key={work.slug}
-            className="work-card"
-            type="button"
-            onClick={() => openModal(work)}
-          >
-            {renderWorkItem(work)}
-          </button>
-        ))}
-      </div>
-      {selected ? (
-        <div
-          className={`work-modal-shell${isOpen ? " is-open" : ""}${
-            isClosing ? " is-closing" : ""
-          }`}
-        >
-          {renderWorkModal(selected, closeModal)}
+    return (
+        <div className="work-wrapper">
+            <div className="work-list">
+                {works.map((work) => (
+                    <button
+                        key={work.slug}
+                        className="work-card"
+                        type="button"
+                        onClick={() => openModal(work)}
+                    >
+                        {renderWorkItem(work)}
+                    </button>
+                ))}
+            </div>
+            {selected ? (
+                <div
+                    className={`work-modal-shell${isOpen ? " is-open" : ""}${isClosing ? " is-closing" : ""
+                        }`}
+                >
+                    {renderWorkModal(selected, closeModal)}
+                </div>
+            ) : null}
         </div>
-      ) : null}
-    </div>
-  );
+    );
 }

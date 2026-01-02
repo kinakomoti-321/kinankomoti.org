@@ -29,14 +29,15 @@ function AboutMe() {
             <h3>きなこもち</h3>
 
             <br></br>
-            <p>東京某所でGraphics Engineerをしています</p>
+            <p>PBRが好きです</p>
           </div>
         </div>
 
         <div style={{ margin: "10px", marginTop: "40px" }}>
           <h2>skill</h2>
           <div style={{ margin: "15px" }}>
-            <p>C++ / C / C# / Rust / GLSL / HLSL / Slang </p>
+            <p> C++ / C / C# / Rust / GLSL / HLSL / Slang </p>
+            <p> Blender / Houdini / Substance Painter</p>
           </div>
         </div>
 
@@ -47,6 +48,16 @@ function AboutMe() {
             <p> - Physically Based Rendering</p>
             <p> - Raytracing</p>
             <p> - Geometry </p>
+            <p> - Optics </p>
+            <p> - Reflection </p>
+          </div>
+        </div>
+
+        <div style={{ margin: "10px", marginTop: "40px" }}>
+          <h2>Activity</h2>
+          <div style={{ margin: "15px" }}>
+            <p> - Internship: Polyphony Digital 2023/2</p>
+            <p> - working in tokyo 2024/4 ~</p>
           </div>
         </div>
 
