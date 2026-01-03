@@ -1,6 +1,8 @@
 ﻿import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import icon from "./icon/kinankomoti.jpg";
+import xIcon from "./icon/x-logo.svg";
+import githubIcon from "./icon/github-mark-white.svg";
 import WorkList from "./work";
 import Background from "./background";
 import ScrollIndicator from "./ScrollIndicator";
@@ -8,9 +10,15 @@ import "./App.css";
 
 function AboutMe() {
   const socialLinks = [
-    { label: "X", href: "https://x.com/Kinakomoti2357" },
-    { label: "GitHub", href: "https://github.com/kinankomoti-321" },
-  ];
+    { label: "X", href: "https://x.com/Kinakomoti2357", icon: "x" },
+    { label: "Blog", href: "https://kinakomoti321.hatenablog.com", icon: "blog" },
+    { label: "GitHub", href: "https://github.com/kinakomoti-321", icon: "github" },
+    { label: "Zenn", href: "https://zenn.dev/kinankomoti", icon: "zenn" },
+  ] as const;
+  const iconMap = {
+    x: { src: xIcon, alt: "X" },
+    github: { src: githubIcon, alt: "GitHub" },
+  } as const;
 
   return (
     <div className="profile-wrap">
@@ -64,10 +72,44 @@ function AboutMe() {
 
         <div style={{ margin: "10px", marginTop: "40px" }}>
           <h2>links</h2>
-          <div style={{ margin: "15px" }}>
-            <p>- X</p>
-            <p>- Blog</p>
-            <p>- Github</p>
+          <div className="social-list">
+            {socialLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="social-link"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="social-icon" aria-hidden="true">
+                  {link.icon === "blog" ? (
+                    <svg
+                      className="social-icon-svg"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M7 7v9a5 5 0 1 0 10 0V6a3 3 0 1 0-6 0v9a1 1 0 1 0 2 0V7"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.6"
+                      />
+                    </svg>
+                  ) : link.icon === "zenn" ? (
+                    <span className="social-icon-text">Z</span>
+                  ) : (
+                    <img
+                      src={iconMap[link.icon].src}
+                      alt=""
+                      className="social-icon-img"
+                    />
+                  )}
+                </span>
+                <span>{link.label}</span>
+              </a>
+            ))}
           </div>
         </div>
       </div>

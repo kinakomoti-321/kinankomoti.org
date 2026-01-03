@@ -160,24 +160,11 @@ function renderWorkModal(selected: WorkData, onClose: () => void) {
                                 allowFullScreen
                             />
                         ) : (
-                            < div
-                                style={{
-                                    position: "relative",
-                                    width: "100%",
-                                    overflow: "hidden",
-                                    borderRadius: "0",
-                                    background: "#111",
-                                }}
-                            >
+                            <div className="work-modal-media">
                                 <img
                                     src={youtubeThumb ?? selected.thumbnail}
                                     alt={selected.title}
-                                    style={{
-                                        width: "100%",
-                                        height: "auto",
-                                        objectFit: "contain",
-                                        display: "block",
-                                    }}
+                                    className="work-modal-media-image"
                                 />
                             </div>
                         )}

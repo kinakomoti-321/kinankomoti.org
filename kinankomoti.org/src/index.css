@@ -116,7 +116,8 @@ button:focus-visible {
   color: rgb(255, 255, 255);
   display: flex;
   align-items: center;
-  padding: 0 100px;
+  justify-content: flex-start;
+  padding: 0 clamp(12px, 6vw, 100px);
   z-index: 100;
   background: transparent;
 }
@@ -131,8 +132,25 @@ button:focus-visible {
   font-weight: bold;
   display: flex;
   gap: 12px;
+  white-space: nowrap;
 }
 
 .content {
   padding-top: 80px;
+}
+
+@media (max-width: 600px) {
+  .header {
+    height: 52px;
+    padding: 0 16px;
+  }
+
+  .header-menu {
+    gap: 8px;
+    font-size: 0.9em;
+  }
+
+  .tab-item {
+    padding: 6px 10px;
+  }
 }
