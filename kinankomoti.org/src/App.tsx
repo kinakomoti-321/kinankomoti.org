@@ -72,44 +72,46 @@ function AboutMe() {
 
         <div style={{ margin: "10px", marginTop: "40px" }}>
           <h2>links</h2>
-          <div className="social-list">
-            {socialLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="social-link"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span className="social-icon" aria-hidden="true">
-                  {link.icon === "blog" ? (
-                    <svg
-                      className="social-icon-svg"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M7 7v9a5 5 0 1 0 10 0V6a3 3 0 1 0-6 0v9a1 1 0 1 0 2 0V7"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.6"
+          <div style={{ margin: "15px" }}>
+            <div className="social-list">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="social-link"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span className="social-icon" aria-hidden="true">
+                    {link.icon === "blog" ? (
+                      <svg
+                        className="social-icon-svg"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M7 7v9a5 5 0 1 0 10 0V6a3 3 0 1 0-6 0v9a1 1 0 1 0 2 0V7"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1.6"
+                        />
+                      </svg>
+                    ) : link.icon === "zenn" ? (
+                      <span className="social-icon-text">Z</span>
+                    ) : (
+                      <img
+                        src={iconMap[link.icon].src}
+                        alt=""
+                        className="social-icon-img"
                       />
-                    </svg>
-                  ) : link.icon === "zenn" ? (
-                    <span className="social-icon-text">Z</span>
-                  ) : (
-                    <img
-                      src={iconMap[link.icon].src}
-                      alt=""
-                      className="social-icon-img"
-                    />
-                  )}
-                </span>
-                <span>{link.label}</span>
-              </a>
-            ))}
+                    )}
+                  </span>
+                  <span>{link.label}</span>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
