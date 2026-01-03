@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import arrowRight from "./icon/arrow-right.svg";
 
 export interface WorkMeta {
     title: string;
@@ -136,60 +137,60 @@ function renderWorkModal(selected: WorkData, onClose: () => void) {
                 aria-label={selected.title}
                 onClick={(event) => event.stopPropagation()}
             >
-                <button
+                <div className="work-modal-header">
+                  <button
                     className="work-modal-close"
                     type="button"
                     onClick={onClose}
                     aria-label="Close"
-                >
-                    ×
-                </button>
+                    >
+                        <img
+                            src={arrowRight}
+                            alt=""
+                            className="work-modal-close-icon"
+                            aria-hidden="true"
+                        />
+                    </button>
+                </div>
                 <div className="work-modal-body">
-                    <div className="work-modal-meta">
+                    <div className="work-modal-meta-text">
+                        <h2 className="work-modal-title">{selected.title}</h2>
+                        <div className="work-modal-date">{selected.date}</div>
+                        <div className="work-modal-tags">
+                            {selected.tags?.map((tag) => (
+                                <span
+                                    key={tag}
+                                    style={{
+                                        padding: "4px 8px",
+                                        borderRadius: "0",
+                                        background: "transparent",
+                                        border: "1px solid #222",
+                                        fontSize: "12px",
+                                    }}
+                                >
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="work-modal-media">
                         {youtubeId ? (
                             <iframe
                                 src={`https://www.youtube.com/embed/${youtubeId}`}
                                 title={selected.title}
-                                style={{
-                                    width: "100%",
-                                    aspectRatio: "16 / 9",
-                                    border: "0",
-                                    display: "block",
-                                }}
+                                className="work-modal-media-frame"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
                             />
                         ) : (
-                            <div className="work-modal-media">
-                                <img
-                                    src={youtubeThumb ?? selected.thumbnail}
-                                    alt={selected.title}
-                                    className="work-modal-media-image"
-                                />
-                            </div>
+                            <img
+                                src={youtubeThumb ?? selected.thumbnail}
+                                alt={selected.title}
+                                className="work-modal-media-image"
+                            />
                         )}
                     </div>
                     <div className="work-modal-detail">
-                        <div className="work-modal-meta-text">
-                            <h2 className="work-modal-title">{selected.title}</h2>
-                            <div className="work-modal-date">{selected.date}</div>
-                            <div className="work-modal-tags">
-                                {selected.tags?.map((tag) => (
-                                    <span
-                                        key={tag}
-                                        style={{
-                                            padding: "4px 8px",
-                                            borderRadius: "0",
-                                            background: "transparent",
-                                            border: "1px solid #222",
-                                            fontSize: "12px",
-                                        }}
-                                    >
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
                         <selected.Component />
                     </div>
                 </div>
@@ -258,3 +259,4 @@ export default function WorkList() {
         </div>
     );
 }
+

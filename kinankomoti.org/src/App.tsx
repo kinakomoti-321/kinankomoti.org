@@ -22,8 +22,8 @@ function AboutMe() {
 
   return (
     <div className="profile-wrap">
-      <div style={{ textAlign: "left" }}>
-        <div style={{ display: "flex", gap: "20px", marginTop: "12px" }}>
+      <div className="profile-body">
+        <div className="profile-header">
           <div>
             <img
               src={icon}
@@ -33,7 +33,7 @@ function AboutMe() {
               style={{ borderRadius: "8px", marginTop: "12px" }}
             />
           </div>
-          <div style={{ textAlign: "left" }}>
+          <div className="profile-header-text">
             <h1>kinankomoti</h1>
             <h3>きなこもち</h3>
 
