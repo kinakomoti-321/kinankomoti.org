@@ -1,4 +1,5 @@
 ﻿import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import icon from "./icon/kinankomoti.jpg";
 import WorkList from "./work";
 import Background from "./background";
@@ -8,7 +9,7 @@ import "./App.css";
 function AboutMe() {
   const socialLinks = [
     { label: "X", href: "https://x.com/Kinakomoti2357" },
-    { label: "GitHub", href: "https://github.com/kinakomoti-321" },
+    { label: "GitHub", href: "https://github.com/kinankomoti-321" },
   ];
 
   return (
@@ -110,10 +111,38 @@ function App() {
     { id: "profile", label: "Profile" },
     { id: "work", label: "Work" },
   ];
+  const profileRef = useRef<HTMLElement | null>(null);
+  const [dimOpacity, setDimOpacity] = useState(0);
+
+  useEffect(() => {
+    let rafId = 0;
+    const updateDim = () => {
+      rafId = 0;
+      const profile = profileRef.current;
+      if (!profile) return;
+      const profileTop = profile.getBoundingClientRect().top + window.scrollY;
+      const progress = Math.min(1, Math.max(0, window.scrollY / profileTop));
+      setDimOpacity(progress * 0.8);
+    };
+    const handleScroll = () => {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(updateDim);
+    };
+
+    updateDim();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", updateDim);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", updateDim);
+      if (rafId) window.cancelAnimationFrame(rafId);
+    };
+  }, []);
 
   return (
     <>
       <Background />
+      <div className="background-dim" style={{ opacity: dimOpacity }} aria-hidden="true" />
       <ScrollIndicator />
       <header className="header">
         <nav className="header-menu">
@@ -129,7 +158,7 @@ function App() {
         <section id="home" className="section">
           <Home />
         </section>
-        <section id="profile" className="section section-center">
+        <section id="profile" className="section section-center" ref={profileRef}>
           <AboutMe />
         </section>
         <section id="work" className="section">

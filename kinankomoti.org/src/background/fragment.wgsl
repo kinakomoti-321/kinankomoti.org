@@ -135,6 +135,11 @@ fn hash33(p: vec3<f32>) -> vec3<f32> {
     return vec3<f32>(x) * (1.0 / f32(0xffffffffu));
 }
 
+// but, it's not linear. haha.
+fn smooth_linear(x : f32)->f32{
+  return select(0.5 * x * x, x - 0.5, x > 1.0);
+}
+
 @fragment
 fn fs_main(@location(0) texcoord: vec2f) -> @location(0) vec4f {
   let time = param.time * 2.0;
@@ -144,7 +149,7 @@ fn fs_main(@location(0) texcoord: vec2f) -> @location(0) vec4f {
   var s : f32;
   s = sdf_line_box(uv,vec2f(0,0),vec2f(0.3),ease_in_out(time * 0.5,2.0));
   let scene1 = 2.5;
-  if(time > scene1){s = sdf_3d_box_line(uv,vec3f(0.0),vec3f(0.6),(time - scene1) * 0.5,(time - scene1) * 0.2);}
+  if(time > scene1){s = sdf_3d_box_line(uv,vec3f(0.0),vec3f(0.6), smooth_linear((time - scene1) * 0.5),smooth_linear((time - scene1) * 0.2));}
   let current = mix(vec3f(0.0),vec3f(0.9),vec3f(smoothstep(0.0051,0.005,s)));
 
   var prev : vec3f = vec3f(0.0);
