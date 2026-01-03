@@ -216,6 +216,15 @@ export default function WorkList() {
         load();
     }, []);
 
+    useEffect(() => {
+        if (!selected) return;
+        const { overflow } = document.body.style;
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = overflow;
+        };
+    }, [selected]);
+
     const closeModal = () => {
         setIsOpen(false);
         setIsClosing(true);

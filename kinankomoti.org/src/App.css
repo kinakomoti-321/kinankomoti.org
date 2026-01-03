@@ -321,9 +321,8 @@
 
 .work-modal {
   position: relative;
-  width: min(2400px, 150vw);
-  max-height: 220vh;
-  max-width: 150vh;
+  width: min(960px, 90vw);
+  max-height: calc(100vh - 48px);
   overflow: auto;
   background: #111111;
   border: none;
@@ -332,6 +331,13 @@
   text-align: left;
   transform: translateY(8px);
   transition: transform 400ms ease;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.work-modal::-webkit-scrollbar {
+  display: none;
 }
 
 .work-modal-body {
