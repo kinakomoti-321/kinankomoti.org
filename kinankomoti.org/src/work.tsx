@@ -234,6 +234,27 @@ export default function WorkList() {
         }, 420);
     };
 
+    useEffect(() => {
+        if (!selected) return;
+        const state = { ...window.history.state, workModal: true };
+        window.history.pushState(state, "");
+        const handlePopState = () => {
+            closeModal();
+        };
+        window.addEventListener("popstate", handlePopState);
+        return () => {
+            window.removeEventListener("popstate", handlePopState);
+        };
+    }, [selected]);
+
+    const handleCloseRequest = () => {
+        if (window.history.state?.workModal) {
+            window.history.back();
+            return;
+        }
+        closeModal();
+    };
+
     const openModal = (work: WorkData) => {
         setSelected(work);
         setIsClosing(false);
@@ -262,7 +283,7 @@ export default function WorkList() {
                     className={`work-modal-shell${isOpen ? " is-open" : ""}${isClosing ? " is-closing" : ""
                         }`}
                 >
-                    {renderWorkModal(selected, closeModal)}
+                    {renderWorkModal(selected, handleCloseRequest)}
                 </div>
             ) : null}
         </div>
