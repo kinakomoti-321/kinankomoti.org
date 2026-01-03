@@ -35,7 +35,7 @@ function getYouTubeId(url: string) {
 
 function getYouTubeThumbnail(url: string) {
     const id = getYouTubeId(url);
-    return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : null;
+    return id ? `https://i.ytimg.com/vi/${id}/maxresdefault.jpg` : null;
 }
 
 export async function getWorks(): Promise<WorkData[]> {
@@ -66,7 +66,7 @@ function renderWorkItem(work: WorkData) {
                 style={{
                     position: "relative",
                     width: "100%",
-                    aspectRatio: "1 / 1",
+                    paddingTop: "100%",
                     overflow: "hidden",
                     borderRadius: "0",
                     background: "#111",
@@ -74,11 +74,28 @@ function renderWorkItem(work: WorkData) {
             >
                 <img
                     src={youtubeThumb ?? work.thumbnail}
-                    alt={work.title}
+                    alt=""
+                    aria-hidden="true"
                     style={{
+                        position: "absolute",
+                        inset: 0,
                         width: "100%",
                         height: "100%",
                         objectFit: "cover",
+                        filter: "blur(6px)",
+                        opacity: 0.4,
+                        transform: "scale(1.02)",
+                    }}
+                />
+                <img
+                    src={youtubeThumb ?? work.thumbnail}
+                    alt={work.title}
+                    style={{
+                        position: "absolute",
+                        inset: 0,
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
                         display: "block",
                     }}
                 />
