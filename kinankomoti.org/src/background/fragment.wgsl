@@ -6,6 +6,10 @@ struct Uniforms {
 
 @group(0) @binding(0)
 var<uniform> param: Uniforms;
+@group(0) @binding(1)
+var prevTexture: texture_2d<f32>;
+@group(0) @binding(2)
+var prevSampler: sampler;
 
 fn sd_sphere(p : vec2f) -> f32{
   return length(p) - 0.5;
@@ -109,15 +113,44 @@ fn ease_in_out(x : f32, n : f32)-> f32{
   );
 }
 
+const C_HASH: u32 = 2309480282u;
+
+fn hash22(p: vec2<f32>) -> vec2<f32> {
+    var x: vec2<u32> = bitcast<vec2<u32>>(p);
+
+    x = C_HASH * ((x >> vec2<u32>(8u)) ^ x.yx);
+    x = C_HASH * ((x >> vec2<u32>(8u)) ^ x.yx);
+    x = C_HASH * ((x >> vec2<u32>(8u)) ^ x.yx);
+
+    return vec2<f32>(x) * (1.0 / f32(0xffffffffu));
+}
+
+fn hash33(p: vec3<f32>) -> vec3<f32> {
+    var x: vec3<u32> = bitcast<vec3<u32>>(p);
+
+    x = C_HASH * ((x >> vec3<u32>(8u)) ^ x.yzx);
+    x = C_HASH * ((x >> vec3<u32>(8u)) ^ x.yzx);
+    x = C_HASH * ((x >> vec3<u32>(8u)) ^ x.yzx);
+
+    return vec3<f32>(x) * (1.0 / f32(0xffffffffu));
+}
+
 @fragment
 fn fs_main(@location(0) texcoord: vec2f) -> @location(0) vec4f {
-  let time = param.time;
+  let time = param.time * 2.0;
+  var tex_uv = texcoord * vec2f(1,-1) * 0.5 + vec2f(0.5);
   var uv = texcoord * vec2f(param.resolution.x, param.resolution.y) / param.resolution.y;
+  uv.y += 0.2;
   var s : f32;
   s = sdf_line_box(uv,vec2f(0,0),vec2f(0.3),ease_in_out(time * 0.5,2.0));
   let scene1 = 2.5;
-  if(time > scene1){s = sdf_3d_box_line(uv,vec3f(0.0),vec3f(0.6),(time - scene1)* 0.1,(time - scene1) * 0.2);}
-  var color = mix(vec3f(0.0),vec3f(0.4),vec3f(smoothstep(0.0051,0.005,s)));
+  if(time > scene1){s = sdf_3d_box_line(uv,vec3f(0.0),vec3f(0.6),(time - scene1) * 0.5,(time - scene1) * 0.2);}
+  let current = mix(vec3f(0.0),vec3f(0.9),vec3f(smoothstep(0.0051,0.005,s)));
+
+  var prev : vec3f = vec3f(0.0);
+  prev += textureSample(prevTexture, prevSampler, tex_uv).rgb;
+
+  let color = current + prev * 0.7;
 
   return vec4f(color, 1.0);
 }
