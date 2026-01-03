@@ -153,26 +153,6 @@ function renderWorkModal(selected: WorkData, onClose: () => void) {
                     </button>
                 </div>
                 <div className="work-modal-body">
-                    <div className="work-modal-meta-text">
-                        <h2 className="work-modal-title">{selected.title}</h2>
-                        <div className="work-modal-date">{selected.date}</div>
-                        <div className="work-modal-tags">
-                            {selected.tags?.map((tag) => (
-                                <span
-                                    key={tag}
-                                    style={{
-                                        padding: "4px 8px",
-                                        borderRadius: "0",
-                                        background: "transparent",
-                                        border: "1px solid #222",
-                                        fontSize: "12px",
-                                    }}
-                                >
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
                     <div className="work-modal-media">
                         {youtubeId ? (
                             <iframe
@@ -190,8 +170,30 @@ function renderWorkModal(selected: WorkData, onClose: () => void) {
                             />
                         )}
                     </div>
-                    <div className="work-modal-detail">
-                        <selected.Component />
+                    <div className="work-modal-meta">
+                        <div className="work-modal-meta-text">
+                            <h2 className="work-modal-title">{selected.title}</h2>
+                            <div className="work-modal-date">{selected.date}</div>
+                            <div className="work-modal-tags">
+                                {selected.tags?.map((tag) => (
+                                    <span
+                                        key={tag}
+                                        style={{
+                                            padding: "4px 8px",
+                                            borderRadius: "0",
+                                            background: "transparent",
+                                            border: "1px solid #222",
+                                            fontSize: "12px",
+                                        }}
+                                    >
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="work-modal-detail">
+                            <selected.Component />
+                        </div>
                     </div>
                 </div>
             </div>

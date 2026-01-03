@@ -346,6 +346,12 @@
   gap: 20px;
 }
 
+.work-modal-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .work-modal-media {
   position: relative;
   width: 100%;
@@ -353,10 +359,12 @@
   border-radius: 0;
   background: #111;
   max-height: 60vh;
+  display: flex;
+  justify-content: center;
 }
 
 .work-modal-media-frame {
-  width: 100%;
+  width: min(100%, calc(60vh * 16 / 9));
   aspect-ratio: 16 / 9;
   border: 0;
   display: block;
@@ -405,6 +413,31 @@
   white-space: normal;
   word-break: break-word;
   overflow-wrap: anywhere;
+}
+
+@media (orientation: landscape) and (min-width: 768px) {
+  .work-modal {
+    width: min(1200px, 94vw);
+    max-height: calc(100vh - 24px);
+  }
+
+  .work-modal-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    align-items: start;
+  }
+
+  .work-modal-media {
+    max-height: none;
+  }
+
+  .work-modal-media-frame {
+    width: 100%;
+  }
+
+  .work-modal-media-image {
+    max-height: 70vh;
+  }
 }
 
 .work-modal-detail :is(p, li) {
