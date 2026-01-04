@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import icon from "./icon/kinankomoti.jpg";
 import xIcon from "./icon/x-logo.svg";
 import githubIcon from "./icon/github-mark-white.svg";
+import zennIcon from "./icon/zenn-logo-only-white.svg";
+import boothIcon from "./icon/booth-logo_icon_white.svg";
 import WorkList from "./work";
 import Background from "./background";
 import ScrollIndicator from "./ScrollIndicator";
@@ -14,10 +16,13 @@ function AboutMe() {
     { label: "Blog", href: "https://kinakomoti321.hatenablog.com", icon: "blog" },
     { label: "GitHub", href: "https://github.com/kinakomoti-321", icon: "github" },
     { label: "Zenn", href: "https://zenn.dev/kinankomoti", icon: "zenn" },
+    { label: "Booth", href: "https://motimoti3d.booth.pm/", icon: "booth" },
   ] as const;
   const iconMap = {
     x: { src: xIcon, alt: "X" },
     github: { src: githubIcon, alt: "GitHub" },
+    zenn: { src: zennIcon, alt: "zenn" },
+    booth: { src: boothIcon, alt: "booth" },
   } as const;
 
   return (
@@ -98,8 +103,6 @@ function AboutMe() {
                           strokeWidth="1.6"
                         />
                       </svg>
-                    ) : link.icon === "zenn" ? (
-                      <span className="social-icon-text">Z</span>
                     ) : (
                       <img
                         src={iconMap[link.icon].src}
