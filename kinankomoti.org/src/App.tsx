@@ -48,7 +48,7 @@ function AboutMe() {
         </div>
 
         <div style={{ margin: "10px", marginTop: "40px" }}>
-          <h2>skill</h2>
+          <h2>Skill</h2>
           <div style={{ margin: "15px" }}>
             <p> C++ / C / C# / Rust / GLSL / HLSL / Slang </p>
             <p> Blender / Houdini / Substance Painter</p>
@@ -56,7 +56,7 @@ function AboutMe() {
         </div>
 
         <div style={{ margin: "10px", marginTop: "40px" }}>
-          <h2>Interests</h2>
+          <h2>Interest</h2>
           <div style={{ margin: "15px" }}>
             <p> - Computer Graphcis</p>
             <p> - Physically Based Rendering</p>
@@ -76,7 +76,7 @@ function AboutMe() {
         </div>
 
         <div style={{ margin: "10px", marginTop: "40px" }}>
-          <h2>links</h2>
+          <h2>Link</h2>
           <div style={{ margin: "15px" }}>
             <div className="social-list">
               {socialLinks.map((link) => (
