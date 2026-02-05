@@ -13,7 +13,7 @@ import "./App.css";
 function AboutMe() {
   const socialLinks = [
     { label: "X", href: "https://x.com/Kinakomoti2357", icon: "x" },
-    { label: "Blog", href: "https://kinakomoti321.hatenablog.com", icon: "blog" },
+    { label: "Blog", href: "https://mochimochi3d.org", icon: "blog" },
     { label: "GitHub", href: "https://github.com/kinakomoti-321", icon: "github" },
     { label: "Zenn", href: "https://zenn.dev/kinankomoti", icon: "zenn" },
     { label: "Booth", href: "https://motimoti3d.booth.pm/", icon: "booth" },
